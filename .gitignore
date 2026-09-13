@@ -1,1 +1,4 @@
 venv/
+website/backend/results/
+website/backend/uploads/
+.DS_Store
