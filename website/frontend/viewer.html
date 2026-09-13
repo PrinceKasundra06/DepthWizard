@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer | DepthWizard Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+</head>
+<body class="draftly-app">
+    <div class="noise-overlay" style="pointer-events: none; z-index: 99;"></div>
+    
+    
+
+    <div class="draftly-main">
+        <aside class="draftly-sidebar">
+            <div class="draftly-sidebar-header">
+                <span class="draftly-sidebar-title"><i class="fa-solid fa-cube"></i> Properties</span>
+            </div>
+            <div class="draftly-sidebar-content">
+                
+                <!-- Mesh Properties -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.25rem;">
+                    <div style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Mesh Data</div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);"><i class="fa-solid fa-circle-nodes" style="margin-right: 6px; opacity: 0.5;"></i> Vertices</span>
+                        <span style="font-size: 12px; color: #fff; font-family: monospace;" id="stat-vertices">--</span>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);"><i class="fa-solid fa-draw-polygon" style="margin-right: 6px; opacity: 0.5;"></i> Faces (Triangles)</span>
+                        <span style="font-size: 12px; color: #fff; font-family: monospace;" id="stat-faces">--</span>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);"><i class="fa-solid fa-ruler-vertical" style="margin-right: 6px; opacity: 0.5;"></i> Bounding Height</span>
+                        <span style="font-size: 12px; color: #00ffcc; font-family: monospace;" id="heightDisplay">--</span>
+                    </div>
+                    
+                    <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 1rem 0;"></div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Geometry Topology</span>
+                        <span style="font-size: 10px; color: rgba(0,0,0,1); background: #ffffff; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Marching Cubes</span>
+                    </div>
+                </div>
+
+                <!-- Material & Shading -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.25rem;">
+                    <div style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Shading Engine</div>
+                    
+                    <div style="display: flex; gap: 0.5rem; align-items: center; font-size: 12px; margin-bottom: 1rem; color: #fff;">
+                        <div style="width: 16px; height: 16px; border-radius: 50%; background: #ffffff; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 0 10px rgba(255,255,255,0.2);"></div>
+                        White Clay (Standard)
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Roughness</span>
+                        <input type="range" min="0" max="100" value="80" id="slider-roughness" style="width: 100px; accent-color: #ffffff; cursor: pointer;">
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Metalness</span>
+                        <input type="range" min="0" max="100" value="10" id="slider-metalness" style="width: 100px; accent-color: #ffffff; cursor: pointer;">
+                    </div>
+                </div>
+
+                <!-- Lighting Environments -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.25rem;">
+                    <div style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Lighting Rig</div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <button id="btn-light-studio" class="draftly-btn-small light-btn" style="justify-content: center; background: rgba(255,255,255,0.1); color: #fff !important; border-color: rgba(255,255,255,0.2);">Studio</button>
+                        <button id="btn-light-dramatic" class="draftly-btn-small light-btn" style="justify-content: center;">Dramatic</button>
+                        <button id="btn-light-sunset" class="draftly-btn-small light-btn" style="justify-content: center;">Sunset</button>
+                        <button id="btn-light-neon" class="draftly-btn-small light-btn" style="justify-content: center;">Neon</button>
+                    </div>
+                </div>
+
+                <!-- Export Settings -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.25rem; margin-bottom: 2rem;">
+                    <div style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Export Config</div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Format</span>
+                        <span style="font-size: 11px; color: #fff; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">.OBJ (Wavefront)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Up Axis</span>
+                        <span style="font-size: 11px; color: #fff; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">+Y</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="draftly-sidebar-footer">
+                <button type="button" onclick="window.location='upload.html'" class="btn btn-secondary" style="width: 100%; height: 36px; font-size: 12px; border-color: rgba(255,255,255,0.1);">Process Another</button>
+            </div>
+        </aside>
+
+        <main class="draftly-viewport" id="canvas-container" style="position: relative;">
+        <header class="draftly-header">
+        <div class="draftly-header-left">
+            <a href="index.html" class="draftly-logo">
+                <i class="fa-solid fa-cube"></i> DepthWizard Studio
+            </a>
+            <span style="color: rgba(255,255,255,0.2); margin: 0 0.5rem;">/</span>
+            <span style="font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500;">Live Preview</span>
+        </div>
+        <div class="draftly-header-right" style="display: flex; gap: 1rem;">
+            <a href="about.html" class="draftly-btn-small btn-about-us">
+                        <i class="fa-solid fa-users" style="margin-right: 6px; opacity: 0.8;"></i> About Us
+                    </a>
+            <button class="draftly-btn-small" onclick="window.location='upload.html'"><i class="fa-solid fa-plus"></i> New</button>
+            <button class="draftly-btn-small draftly-btn-primary" id="downloadObjBtn"><i class="fa-solid fa-download"></i> Export OBJ</button>
+        </div>
+    </header>
+            <!-- 3D Canvas will be injected here -->
+            
+            <!-- Viewport HUD Overlay -->
+            <div style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: rgba(10,10,10,0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 6px; display: flex; gap: 4px; z-index: 10;">
+                <button id="btn-wireframe" class="draftly-btn-small" style="height: 32px; padding: 0 1rem; border-radius: 999px; background: transparent; border: none; color: #fff;"><i class="fa-solid fa-border-all" style="margin-right: 6px;"></i> Wireframe</button>
+                <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 4px 2px;"></div>
+                <button id="btn-autorotate" class="draftly-btn-small" style="height: 32px; padding: 0 1rem; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: #fff !important;"><i class="fa-solid fa-arrows-rotate" style="margin-right: 6px;"></i> Auto-Spin</button>
+                <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 4px 2px;"></div>
+                <button id="btn-reset-cam" class="draftly-btn-small" style="height: 32px; padding: 0 1rem; border-radius: 999px; background: transparent; border: none; color: #fff;"><i class="fa-solid fa-video" style="margin-right: 6px;"></i> Reset Cam</button>
+            </div>
+            
+            <!-- Axis Legend -->
+            <div style="position: absolute; bottom: 16px; left: 16px; z-index: 10; pointer-events: none;">
+                <div style="font-size: 10px; color: rgba(255,255,255,0.5); font-family: monospace; letter-spacing: 0.1em;">DEPTHWIZARD ENGINE v2.0</div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/viewer.js?v=3"></script>
+    <script src="js/main.js?v=3"></script>
+</body>
+</html>

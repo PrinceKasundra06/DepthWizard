@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepthWizard | 2D to 3D Flythrough</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Three.js for interactive 3D background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="noise-overlay"></div>
+    
+    <!-- 3D Hero Container -->
+    <div id="hero-3d-container"></div>
+
+    <nav>
+        <div class="logo">DepthWizard</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="upload.html">Upload</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <h1 class="reveal">Transform 2D Images into<br>3D Flythroughs</h1>
+        <p class="reveal reveal-delay-1">Experience the magic of single-view height estimation. DepthWizard uses advanced AI to estimate depth and generate immersive 3D models from a single photograph.</p>
+        <div class="hero-buttons reveal reveal-delay-2">
+            <a href="upload.html" class="btn">Start Building</a>
+            <a href="about.html" class="btn btn-outline">Learn How It Works</a>
+        </div>
+    </main>
+    
+    <div class="container reveal">
+        <div style="text-align: center; margin-top: 4rem;">
+            <h2 style="font-size: 2rem; font-weight: 500; margin-bottom: 1rem;">Why DepthWizard?</h2>
+            <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap;">
+                <div class="upload-box interactive-card" style="flex: 1; min-width: 250px; padding: 2rem; cursor: default;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 500;">AI Motion</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Our neural networks analyze perspective and light to generate accurate depths instantly.</p>
+                </div>
+                <div class="upload-box interactive-card" style="flex: 1; min-width: 250px; padding: 2rem; cursor: default;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 500;">Frame Extraction</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Export your 3D creations as point clouds, meshes, or interactive scroll experiences.</p>
+                </div>
+                <div class="upload-box interactive-card" style="flex: 1; min-width: 250px; padding: 2rem; cursor: default;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 500;">Deploy-Ready</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Download production-ready assets and HTML to host your interactive 3D flythroughs anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">DepthWizard</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="upload.html">Upload</a>
+                <a href="about.html">About</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 DepthWizard Inc. All rights reserved. System Operational.
+        </div>
+    </footer>
+
+    <script src="js/hero-3d.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

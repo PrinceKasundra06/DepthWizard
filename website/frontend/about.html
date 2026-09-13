@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DepthWizard Studio</title>
+    <!-- Use exactly the same stylesheets as the rest of the app -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Include Three.js for the background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        .team-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+        }
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
+        }
+        .team-avatar i {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.8);
+        }
+    
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    
+        .marquee-content-wrapper {
+            animation: scrollMarquee 25s linear infinite;
+        }
+        .marquee-container:hover .marquee-content-wrapper {
+            animation-play-state: paused;
+        }
+        .marquee-name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: crosshair;
+        }
+        .marquee-name:hover {
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.8);
+            transform: scale(1.1);
+        }
+        .marquee-star {
+            color: rgba(255,255,255,0.15);
+            font-size: 1rem;
+        }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="draftly-theme">
+    <div class="draftly-app">
+        <!-- HEADER -->
+        
+
+        <!-- MAIN LAYOUT -->
+        <div class="draftly-main">
+            <!-- SIDEBAR -->
+            
+
+            <!-- VIEWPORT -->
+            <main class="draftly-viewport" style="position: relative; background: #000;">
+        <header class="draftly-header">
+            <div class="draftly-header-left">
+                <a href="index.html" class="draftly-logo" style="text-decoration: none; cursor: pointer;">
+                    <i class="fa-solid fa-cube"></i> DepthWizard Studio
+                </a>
+                <div class="draftly-breadcrumb">
+                    <span style="color: rgba(255,255,255,0.2);">/</span>
+                    <span style="color: rgba(255,255,255,0.6);">About the Team</span>
+                </div>
+            </div>
+            <div class="draftly-header-right">
+                <button class="draftly-btn-small" onclick="window.location='index.html'"><i class="fa-solid fa-house"></i> Home</button>
+            </div>
+        </header>
+                <!-- 3D Particle Wave Background -->
+                <canvas id="bg-canvas" style="position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;"></canvas>
+                <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%); z-index: 5; pointer-events: none;"></div>
+                
+                <!-- Scrollable Content Container -->
+                <div style="position: absolute; inset: 0; z-index: 10; overflow-y: auto; padding: 8rem 2rem 4rem 2rem; scroll-behavior: smooth;">
+                    <div style="min-height: 85vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; max-width: 1000px; margin: 0 auto; padding-top: 15vh;">
+                        
+                        <!-- Floating Glass Badge -->
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 8px 24px; border-radius: 999px; margin-bottom: 3rem; backdrop-filter: blur(20px); animation: float 6s ease-in-out infinite;">
+                            <span style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.2em;">Our Philosophy</span>
+                        </div>
+
+                        <!-- Massive Emotional Headline -->
+                        <h1 style="font-size: 5rem; line-height: 1.1; font-weight: 500; letter-spacing: -0.04em; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 3rem;">
+                            Breathing <span style="background: linear-gradient(135deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">life</span> into pixels.
+                        </h1>
+
+                        <!-- Emotional Manifesto -->
+                        <div style="max-width: 700px; position: relative;">
+                            <div style="position: absolute; left: -20px; top: -20px; font-size: 6rem; color: rgba(255,255,255,0.03); font-family: serif; line-height: 1;">"</div>
+                            <p style="font-size: 1.25rem; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem; font-weight: 300;">
+                                We didn't build DepthWizard just to write code. We built it because we believe that human memory shouldn't be confined to flat, two-dimensional screens. 
+                            </p>
+                            <p style="font-size: 1.25rem; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 4rem; font-weight: 300;">
+                                Every photograph captures a singular moment in time. Our mission is to shatter the glass—to use the absolute bleeding edge of neural architecture to let you step <em>inside</em> your memories. We are democratizing the geometry of the real world.
+                            </p>
+                        </div>
+
+                        <!-- The Team Lineup -->
+                        <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); margin-bottom: 4rem;"></div>
+
+                    </div> <!-- End of max-width: 1000px div -->
+
+                    <!-- Marquee pulled OUTSIDE the max-width container, using negative margins to break parent padding -->
+                    <div style="display: flex; flex-direction: column; align-items: center; width: calc(100% + 4rem); margin-left: -2rem; margin-bottom: 4rem;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.3em; margin-bottom: 2rem;">Forged by</span>
+                        
+                        <!-- Infinite Marquee Container -->
+                        <div class="marquee-container" style="width: 100%; overflow: hidden; white-space: nowrap; position: relative; padding: 1rem 0; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div class="marquee-content-wrapper" style="display: inline-flex; width: max-content;">
+                                
+                                <!-- First Set -->
+                                <div class="marquee-track" style="display: inline-flex; align-items: center; gap: 4rem; padding-right: 4rem;">
+                                    <span class="marquee-name">Prince Kasundra</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Het Chikhaliya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Prachi Lodhia</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Kashyap Dubariya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Vishwa Gondaliya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Parth Lakhdhir</span><span class="marquee-star">✦</span>
+                                </div>
+                                
+                                <!-- Second Set (Duplicate for seamless loop) -->
+                                <div class="marquee-track" style="display: inline-flex; align-items: center; gap: 4rem; padding-right: 4rem;">
+                                    <span class="marquee-name">Prince Kasundra</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Het Chikhaliya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Prachi Lodhia</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Kashyap Dubariya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Vishwa Gondaliya</span><span class="marquee-star">✦</span>
+                                    <span class="marquee-name">Parth Lakhdhir</span><span class="marquee-star">✦</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- End of scroll container -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Main scripts for background particle wave -->
+    <script src="js/main.js"></script>
+</body>
+</html>
